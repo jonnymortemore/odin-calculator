@@ -96,11 +96,9 @@ function deleteValue() {
     let new_text = display.textContent;
     
     display.textContent = new_text.slice(0, new_text.length - 1);
-    console.log(`"${display.textContent}"`)
     if (display.textContent === "") {
         display.textContent = "0";
     }
-
     if (calculatorValues.operand === "" && calculatorValues.number1 != "") {
         calculatorValues.number1 = calculatorValues.number1.slice(0, calculatorValues.number1.length - 1);
     }
@@ -156,6 +154,7 @@ document.querySelector('.decimal').addEventListener('click', () => {
     }
 })
 
+//keyboard key detection
 document.addEventListener('keydown', function(event) {
     numbers = ["0","1","2","3","4","5","6","7","8","9"];
     operands = ["+", "-", "/", "*"]
@@ -170,4 +169,9 @@ document.addEventListener('keydown', function(event) {
         deleteValue()
     }
     
+})
+
+//back button
+document.querySelector('.back').addEventListener('click', () => {
+    deleteValue()
 })
