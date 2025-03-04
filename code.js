@@ -18,7 +18,9 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    return a / b
+    //if b is 0 divide by 1 instead
+    alert("None of that now please")
+    return b == 0 ? 0 : a / b
 }
 
 function operator(a, b, operator) {
@@ -91,7 +93,7 @@ document.querySelectorAll('.operand').forEach((el => {
 
 //equals button
 document.querySelector('.equals').addEventListener('click', () => {
-    if (calculatorValues.number1 != 0 && calculatorValues.number2 != 0 && calculatorValues.operand != "") {
+    if (calculatorValues.number1 != "" && calculatorValues.number2 != "" && calculatorValues.operand != "") {
         sum = operator(calculatorValues.number1, calculatorValues.number2, operand=calculatorValues.operand);
         displayValue(sum, reset=true);
         calculatorValues.number1 = sum;
