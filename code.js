@@ -99,3 +99,11 @@ document.querySelector('.equals').addEventListener('click', () => {
         calculatorValues.operand = ""
     }
 })
+
+//clear button
+document.querySelector('.clear').addEventListener('click', () => {
+    displayValue(0, reset=true);
+    calculatorValues.number1 = 0;
+    calculatorValues.number2 = 0
+    calculatorValues.operand = ""
+})
