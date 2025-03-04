@@ -39,7 +39,7 @@ function operator(a, b, operator) {
             result = divide(a, b)
             break;
     }
-    return result
+    return parseFloat(result.toPrecision(6));
 }
 
 function displayValue(value, reset) {
