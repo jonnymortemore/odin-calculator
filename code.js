@@ -19,7 +19,6 @@ function multiply(a, b) {
 
 function divide(a, b) {
     //if b is 0 divide by 1 instead
-    alert("None of that now please")
     return b == 0 || a == 0 ? 0 : a / b
 }
 
@@ -55,44 +54,34 @@ function displayValue(value, reset) {
     
 }
 
-//number buttons
-document.querySelectorAll('.number').forEach((el => {
-    el.addEventListener('click', (e) => {
-        let value = e.target.dataset.value;
-        console.log(value);
-        if (calculatorValues.operand === "") {
-            if (calculatorValues.number1 == "") {
-                displayValue(value, reset=true)
-                calculatorValues.number1 = value;
-            } else {
-                displayValue(value, reset=false);
-                calculatorValues.number1 += value;
-            };
-        }
-        else  {
-            if (calculatorValues.number2 == "") {
-                calculatorValues.number2 = value;
-            } else {
-                calculatorValues.number2 += value;
-            };
+function saveValue(value) {
+    if (calculatorValues.operand === "") {
+        if (calculatorValues.number1 == "") {
+            displayValue(value, reset=true)
+            calculatorValues.number1 = value;
+        } else {
             displayValue(value, reset=false);
-        }
-    })
-}))
+            calculatorValues.number1 += value;
+        };
+    }
+    else  {
+        if (calculatorValues.number2 == "") {
+            calculatorValues.number2 = value;
+        } else {
+            calculatorValues.number2 += value;
+        };
+        displayValue(value, reset=false);
+    }
+}
 
-//operand buttons
-document.querySelectorAll('.operand').forEach((el => {
-    el.addEventListener('click', (e) => {
-        let value = e.target.dataset.value;
-        if (calculatorValues.operand === "") {
-            calculatorValues.operand = value;
-            displayValue(value, reset=false)
-        }
-    })
-}))
+function saveOperand(value) {
+    if (calculatorValues.operand === "") {
+        calculatorValues.operand = value;
+        displayValue(value, reset=false)
+    }
+}
 
-//equals button
-document.querySelector('.equals').addEventListener('click', () => {
+function sumValues() {
     if (calculatorValues.number1 != "" && calculatorValues.number2 != "" && calculatorValues.operand != "") {
         sum = operator(calculatorValues.number1, calculatorValues.number2, operand=calculatorValues.operand);
         displayValue(sum, reset=true);
@@ -100,6 +89,26 @@ document.querySelector('.equals').addEventListener('click', () => {
         calculatorValues.number2 = ""
         calculatorValues.operand = ""
     }
+}
+
+//number buttons
+document.querySelectorAll('.number').forEach((el => {
+    el.addEventListener('click', (e) => {
+        saveValue(e.target.dataset.value);
+        
+    })
+}))
+
+//operand buttons
+document.querySelectorAll('.operand').forEach((el => {
+    el.addEventListener('click', (e) => {
+        saveOperand(e.target.dataset.value)
+    })
+}))
+
+//equals button
+document.querySelector('.equals').addEventListener('click', () => {
+    sumValues()
 })
 
 //clear button
@@ -124,7 +133,18 @@ document.querySelector('.decimal').addEventListener('click', () => {
             displayValue(".", reset=false);
             calculatorValues.number2 += "."
         }
-        
     }
-    
+})
+
+document.addEventListener('keydown', function(event) {
+    numbers = ["0","1","2","3","4","5","6","7","8","9"];
+    operands = ["+", "-", "/", "*"]
+    console.log(event.key)
+    if (numbers.includes(event.key)) {
+        saveValue(event.key);
+    } else if (operands.includes(event.key)) {
+        saveOperand(event.key)
+    } else if (event.key === "Enter") {
+        sumValues()
+    }
 })
