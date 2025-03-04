@@ -112,11 +112,17 @@ document.querySelector('.clear').addEventListener('click', () => {
 
 document.querySelector('.decimal').addEventListener('click', () => {
     if (calculatorValues.number1 != 0 && calculatorValues.operand == "") {
-        displayValue(".", reset=false);
-        calculatorValues.number1 += "."
+        if (!calculatorValues.number1.includes(".")) {
+             displayValue(".", reset=false);
+            calculatorValues.number1 += "."
+        }
+       
     } else if (calculatorValues.number2 != 0 && calculatorValues.operand != "") {
-        displayValue(".", reset=false);
-        calculatorValues.number2 += "."
+        if (!calculatorValues.number2.includes(".")) {
+            displayValue(".", reset=false);
+            calculatorValues.number2 += "."
+        }
+        
     }
     
 })
