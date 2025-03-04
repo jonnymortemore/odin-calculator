@@ -122,13 +122,13 @@ document.querySelector('.clear').addEventListener('click', () => {
 //decimal button
 
 document.querySelector('.decimal').addEventListener('click', () => {
-    if (calculatorValues.number1 != 0 && calculatorValues.operand == "") {
+    if (calculatorValues.number1 != "" && calculatorValues.operand == "") {
         if (!calculatorValues.number1.includes(".")) {
              displayValue(".", reset=false);
             calculatorValues.number1 += "."
         }
        
-    } else if (calculatorValues.number2 != 0 && calculatorValues.operand != "") {
+    } else if (calculatorValues.number2 != "" && calculatorValues.operand != "") {
         if (!calculatorValues.number2.includes(".")) {
             displayValue(".", reset=false);
             calculatorValues.number2 += "."
