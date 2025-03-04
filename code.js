@@ -85,10 +85,29 @@ function sumValues() {
     if (calculatorValues.number1 != "" && calculatorValues.number2 != "" && calculatorValues.operand != "") {
         sum = operator(calculatorValues.number1, calculatorValues.number2, operand=calculatorValues.operand);
         displayValue(sum, reset=true);
-        calculatorValues.number1 = sum;
+        calculatorValues.number1 = String(sum);
         calculatorValues.number2 = ""
         calculatorValues.operand = ""
     }
+}
+
+function deleteValue() {
+    const display = document.querySelector('.display');
+    let new_text = display.textContent;
+    
+    display.textContent = new_text.slice(0, new_text.length - 1);
+    if (display.textContent === "") {
+        display.textContent = "0";
+    }
+    if (calculatorValues.operand === "" && calculatorValues.number1 != "") {
+        calculatorValues.number1 = calculatorValues.number1.slice(0, calculatorValues.number1.length - 1);
+    }
+    else if (calculatorValues.operand != "" && calculatorValues.number2 != "") {
+        calculatorValues.number2 = calculatorValues.number2.slice(0, calculatorValues.number2.length - 1);
+    } else {
+        calculatorValues.operand = ""
+    }
+    
 }
 
 //number buttons
@@ -120,7 +139,6 @@ document.querySelector('.clear').addEventListener('click', () => {
 })
 
 //decimal button
-
 document.querySelector('.decimal').addEventListener('click', () => {
     if (calculatorValues.number1 != "" && calculatorValues.operand == "") {
         if (!calculatorValues.number1.includes(".")) {
@@ -136,15 +154,24 @@ document.querySelector('.decimal').addEventListener('click', () => {
     }
 })
 
+//keyboard key detection
 document.addEventListener('keydown', function(event) {
     numbers = ["0","1","2","3","4","5","6","7","8","9"];
     operands = ["+", "-", "/", "*"]
-    console.log(event.key)
+    //console.log(event.key)
     if (numbers.includes(event.key)) {
         saveValue(event.key);
     } else if (operands.includes(event.key)) {
         saveOperand(event.key)
     } else if (event.key === "Enter") {
         sumValues()
+    } else if (event.key === "Backspace") {
+        deleteValue()
     }
+    
+})
+
+//back button
+document.querySelector('.back').addEventListener('click', () => {
+    deleteValue()
 })
