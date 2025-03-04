@@ -20,7 +20,7 @@ function multiply(a, b) {
 function divide(a, b) {
     //if b is 0 divide by 1 instead
     alert("None of that now please")
-    return b == 0 ? 0 : a / b
+    return b == 0 || a == 0 ? 0 : a / b
 }
 
 function operator(a, b, operator) {
