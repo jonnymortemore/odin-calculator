@@ -6,7 +6,7 @@
     --number-colour: grey;
     --operand-colour: orange;
     --font-color: black;
-    --hover-colour: black;
+    --hover-colour: red;
     --equals: green;
     --display: white;
 }
@@ -24,8 +24,8 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     width: 300px;
-    row-gap: 1px;
-    column-gap: 1px;
+    row-gap: 2px;
+    column-gap: 6px;
     background-color: darkgrey;
     padding: 15px;
     border-radius: 10px;
@@ -52,12 +52,20 @@
     background-color: var(--number-colour);
 }
 
+button:hover {
+    border-color: var(--hover-colour);
+}
+
 .operand {
     background-color: var(--operand-colour);
 }
 
 .equals {
     background-color: var(--equals);
+}
+
+button:active {
+    transform: translateY(4px);
 }
 
 .display  {
