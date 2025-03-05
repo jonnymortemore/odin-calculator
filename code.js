@@ -40,7 +40,7 @@ function operator(a, b, operator) {
             result = divide(a, b)
             break;
     }
-    return parseFloat(result.toPrecision(6));
+    return result;
 }
 
 function displayValue(value, reset) {
@@ -83,7 +83,10 @@ function saveOperand(value) {
 
 function sumValues() {
     if (calculatorValues.number1 != "" && calculatorValues.number2 != "" && calculatorValues.operand != "") {
-        sum = operator(calculatorValues.number1, calculatorValues.number2, operand=calculatorValues.operand);
+        let sum = operator(calculatorValues.number1, calculatorValues.number2, operand=calculatorValues.operand);
+        if (!Number.isInteger(sum)) {
+            sum = parseFloat(sum.toPrecision(10))
+        }
         displayValue(sum, reset=true);
         calculatorValues.number1 = String(sum);
         calculatorValues.number2 = ""
